@@ -1,0 +1,3 @@
+export const WIDGET_OPENED = 'WIDGET_OPENED';
+export const WIDGET_CLOSED = 'WIDGET_CLOSED';
+export const WIDGET_EVENT = 'WIDGET_EVENT';
