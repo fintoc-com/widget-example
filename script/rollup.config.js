@@ -1,12 +1,17 @@
-export default {
-  input: 'src/main.js',
-  output: {
-    dir: 'dist',
-    format: 'iife',
-    globals: {
-      '$document': 'document',
-      '$window': 'window',
+export default [
+  {
+    input: 'src/main.js',
+    output: {
+      file: 'dist/main.iife.js',
+      format: 'iife',
+      name: 'WidgetExample',
     },
   },
-  external: ['$document', '$window'],
-}
+  {
+    input: 'src/main.js',
+    output: {
+      file: 'dist/main.es.js',
+      format: 'es',
+    },
+  },
+];

@@ -1,5 +1,3 @@
-import $window from '$window';
-
 import * as messageTypes from '../../sharedTypes/messages';
 
 
@@ -26,9 +24,9 @@ function buildEventListener(onEvent, onExit) {
 
 export function setListeners(onEvent, onExit) {
   eventListener = buildEventListener(onEvent, onExit);
-  $window.addEventListener('message', eventListener, false);
+  window.addEventListener('message', eventListener, false);
 }
 
 export function removeListeners() {
-  $window.removeEventListener('message', eventListener, false);
+  window.removeEventListener('message', eventListener, false);
 }

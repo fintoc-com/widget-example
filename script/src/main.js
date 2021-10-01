@@ -1,4 +1,3 @@
-import $window from '$window';
 import Widget from './widget';
 
 function createWidget({
@@ -16,4 +15,4 @@ function createWidget({
   return widget;
 }
 
-$window.WidgetExample = { create: createWidget };
+export default { create: createWidget };
