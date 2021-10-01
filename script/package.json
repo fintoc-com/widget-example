@@ -1,0 +1,11 @@
+{
+  "name": "widget-script-example",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "rollup --config"
+  },
+  "dependencies": {
+    "rollup": "^2.58.0"
+  },
+  "devDependencies": {}
+}
