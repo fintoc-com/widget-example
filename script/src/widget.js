@@ -6,6 +6,7 @@ import * as DOM from './dom';
 export default class Widget {
   #iframe;
   #opened;
+  #configured;
   #config;
   #callbacks;
 
@@ -16,6 +17,7 @@ export default class Widget {
   }) {
     this.#iframe = DOM.mountIframeToDOM();
     this.#opened = false;
+    this.#configured = false;
     this.#config = {
       title,
     };
@@ -25,6 +27,8 @@ export default class Widget {
       this.#triggerEvent.bind(this),
       this.#triggerExit.bind(this),
     );
+
+    this._configure();
   }
 
   #triggerEvent(data) {
@@ -36,17 +40,31 @@ export default class Widget {
     this.close();
   }
 
+  _configure() {
+    clientAPI.configureWidget(this.#iframe, this.#config);
+  }
+
+  _setConfigured() {
+    this.#configured = true;
+    if (this.#opened) {
+      clientAPI.openWidget(this.#iframe);
+    }
+  }
+
   open() {
-    clientAPI.openWidget(this.#iframe);
     this.#opened = true;
+    if (this.#configured) {
+      clientAPI.openWidget(this.#iframe);
+    }
   }
 
   close() {
-    clientAPI.closeWidget(this.#iframe);
     this.#opened = false;
+    clientAPI.closeWidget(this.#iframe);
   }
 
   destroy() {
+    this.#configured = false;
     this.close();
     clientAPI.removeWidgetFromDOM(this.#iframe);
     listeners.removeListeners();

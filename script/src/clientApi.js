@@ -1,6 +1,13 @@
 import * as messages from '../../sharedTypes/messages';
 
 
+export function configureWidget($iframe, configuration) {
+  $iframe.contentWindow.postMessage({
+    type: messages.WIDGET_CONFIGURATION_REQUEST,
+    configuration,
+  }, '*');
+}
+
 export function openWidget($iframe) {
   Object.assign($iframe, { style: `z-index: ${Number.MAX_SAFE_INTEGER}; width:100%; height: 100vh; position: absolute; top: 0px; left: 0px; inset: 0px; border-width: 0px; display: block; overflow: hidden auto;` });
   $iframe.contentWindow.postMessage({ type: messages.WIDGET_OPENED }, '*');
