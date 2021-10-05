@@ -8,11 +8,11 @@ function buildEventListener(onEvent, onExit) {
     const { data } = event;
     switch (data.type) {
       case (messageTypes.WIDGET_CLOSED): {
-        onExit(data, widget);
+        onExit(data);
         break;
       }
       case (messageTypes.WIDGET_EVENT): {
-        onEvent(data, widget);
+        onEvent(data);
         break;
       }
       default: {
