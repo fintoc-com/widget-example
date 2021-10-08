@@ -1,32 +1,45 @@
 <script setup>
-  import { onMounted } from 'vue';
+  import { computed, onMounted } from 'vue';
+  import { useStore } from 'vuex';
   import WidgetContainer from './WidgetContainer.vue';
-  import * as messages from '../widgetAPI/messages';
+  import * as widgetAPI from '../utils/widgetApi';
   import closeURL from '../assets/close.png';
 
+  const $store = useStore();
+
+  const loading = computed(() => $store.state.widgetData.loading);
+  const title = computed(() => $store.state.widgetData.title);
 
   onMounted(() => {
-    console.log('INTERNAL: Widget just got mounted...');
-    messages.widgetOpened();
+    console.log('WIDGET: Just got mounted...');
+    widgetAPI.widgetOpened();
   });
 
   function closeWidget() {
-    console.log('INTERNAL: Closing the widget...');
-    messages.widgetClosed();
+    console.log('WIDGET: Closing the widget...');
+    widgetAPI.widgetClosed();
   }
 </script>
 
 <template>
-  <div class="widget">
-    <div class="close-container">
-      <img
-        :src="closeURL"
-        @click="closeWidget"
-        class="close"
-      />
+  <template v-if="loading">
+    Loading...
+  </template>
+  <template v-else>
+    <div class="widget">
+      <div class="close-container">
+        <img
+          :src="closeURL"
+          @click="closeWidget"
+          class="close"
+        />
+      </div>
+      <div class="title">
+        {{ title }}
+      </div>
+      <WidgetContainer />
     </div>
-    <WidgetContainer />
-  </div>
+  </template>
 </template>
 
 <style scoped>
@@ -52,5 +65,10 @@
 
 .close:hover {
   cursor: pointer;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
 }
 </style>

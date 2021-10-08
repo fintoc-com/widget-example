@@ -1,4 +1,6 @@
-import { IFRAME_ID, WIDGET_URL } from './constants';
+import { IFRAME_ID, DEVELOPMENT_WIDGET_URL, PRODUCTION_WIDGET_URL } from './constants';
+
+const WIDGET_URL = DEVELOPMENT_WIDGET_URL;
 
 function iframeExists() {
   return !!document.getElementById(IFRAME_ID);

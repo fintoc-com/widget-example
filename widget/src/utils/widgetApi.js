@@ -21,9 +21,18 @@ export function widgetOpened() {
   }, '*');
 }
 
-export function widgetClosed() {
+export function widgetListening() {
   window.parent.postMessage({
-    type: messageTypes.WIDGET_CLOSED,
+    type: messageTypes.WIDGET_LISTENING,
+    metadata: {
+      time: getTimestamp(),
+    },
+  }, '*');
+}
+
+export function widgetConfigured() {
+  window.parent.postMessage({
+    type: messageTypes.WIDGET_CONFIGURED,
     metadata: {
       time: getTimestamp(),
     },
@@ -34,6 +43,15 @@ export function widgetEvent(number) {
   window.parent.postMessage({
     type: messageTypes.WIDGET_EVENT,
     number,
+    metadata: {
+      time: getTimestamp(),
+    },
+  }, '*');
+}
+
+export function widgetClosed() {
+  window.parent.postMessage({
+    type: messageTypes.WIDGET_CLOSED,
     metadata: {
       time: getTimestamp(),
     },

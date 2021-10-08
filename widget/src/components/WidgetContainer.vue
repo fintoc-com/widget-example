@@ -1,20 +1,20 @@
 <script setup>
   import Button from './Button.vue';
-  import * as messages from '../widgetAPI/messages';
+  import * as widgetAPI from '../utils/widgetApi';
 
   function firstEvent() {
-    console.log('INTERNAL: Triggering the first event...');
-    messages.widgetEvent(1);
+    console.log('WIDGET: Triggering the first event...');
+    widgetAPI.widgetEvent(1);
   }
 
   function secondEvent() {
-    console.log('INTERNAL: Triggering the second event...');
-    messages.widgetEvent(2);
+    console.log('WIDGET: Triggering the second event...');
+    widgetAPI.widgetEvent(2);
   }
 
   function thirdEvent() {
-    console.log('INTERNAL: Triggering the third event...');
-    messages.widgetEvent(3);
+    console.log('WIDGET: Triggering the third event...');
+    widgetAPI.widgetEvent(3);
   }
 </script>
 
