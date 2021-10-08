@@ -1,4 +1,4 @@
-import * as clientAPI from './clientApi';
+import * as scriptAPI from './scriptApi';
 import * as listeners from './listeners';
 import * as DOM from './dom';
 
@@ -23,12 +23,23 @@ export default class Widget {
     };
     this.#callbacks = { onEvent, onExit };
 
-    listeners.setListeners(
-      this.#triggerEvent.bind(this),
-      this.#triggerExit.bind(this),
-    );
+    listeners.setListeners({
+      configure: this.#configure.bind(this),
+      setConfigured: this.#setConfigured.bind(this),
+      onEvent: this.#triggerEvent.bind(this),
+      onExit: this.#triggerExit.bind(this),
+    });
+  }
 
-    this._configure();
+  #configure() {
+    scriptAPI.configureWidget(this.#iframe, this.#config);
+  }
+
+  #setConfigured() {
+    this.#configured = true;
+    if (this.#opened) {
+      scriptAPI.openWidget(this.#iframe);
+    }
   }
 
   #triggerEvent(data) {
@@ -40,33 +51,22 @@ export default class Widget {
     this.close();
   }
 
-  _configure() {
-    clientAPI.configureWidget(this.#iframe, this.#config);
-  }
-
-  _setConfigured() {
-    this.#configured = true;
-    if (this.#opened) {
-      clientAPI.openWidget(this.#iframe);
-    }
-  }
-
   open() {
     this.#opened = true;
     if (this.#configured) {
-      clientAPI.openWidget(this.#iframe);
+      scriptAPI.openWidget(this.#iframe);
     }
   }
 
   close() {
     this.#opened = false;
-    clientAPI.closeWidget(this.#iframe);
+    scriptAPI.closeWidget(this.#iframe);
   }
 
   destroy() {
     this.#configured = false;
     this.close();
-    clientAPI.removeWidgetFromDOM(this.#iframe);
+    scriptAPI.removeWidgetFromDOM(this.#iframe);
     listeners.removeListeners();
   }
 }
