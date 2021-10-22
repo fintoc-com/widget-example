@@ -3,7 +3,7 @@ import * as messageTypes from '../../sharedTypes/messages';
 
 let eventListener;
 
-function buildEventListener({configure, setConfigured, onEvent, onExit}) {
+function buildEventListener({ configure, setConfigured, onEvent, onExit }) {
   return function listener(event) {
     const { data } = event;
     switch (data.type) {
