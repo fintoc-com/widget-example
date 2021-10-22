@@ -3,7 +3,8 @@ import * as messageTypes from '../../sharedTypes/messages';
 
 let eventListener;
 
-function buildEventListener({ configure, setConfigured, onEvent, onExit }) {
+function buildEventListener(hooks) {
+  const { configure, setConfigured, onEvent, onExit } = hooks;
   return function listener(event) {
     const { data } = event;
     switch (data.type) {
@@ -30,8 +31,8 @@ function buildEventListener({ configure, setConfigured, onEvent, onExit }) {
   };
 }
 
-export function setListeners(onEvent, onExit) {
-  eventListener = buildEventListener(onEvent, onExit);
+export function setListeners(hooks) {
+  eventListener = buildEventListener(hooks);
   window.addEventListener('message', eventListener, false);
 }
 
