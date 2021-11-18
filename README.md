@@ -20,6 +20,12 @@ This will start the server at `http://localhost:3000`. Keep in mind that this wi
 
 Now, you can open the file `examples/index.html` with your favorite browser, and the widget will appear!
 
+Note that the `iife` version will always inyect the `WidgetExample` object to the namespace so that you can use `WidgetExample.create()` (this can be configured on the `name` attribute of the `iife` configuration object located at `script/rollup.config.js`). The `es` version, on the other hand, is standard ES6 Module syntax, so you can name the `default` import whatever you want using:
+
+```js
+import MyWidgetExampleObject from 'script/dist/main.es.js';
+```
+
 ## Design
 
 The design choices that were made for this widget can be separated into two categories.
