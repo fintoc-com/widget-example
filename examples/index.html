@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../script/dist/main.iife.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const onEvent = (data) => {
+      console.log('APPLICATION: EVENT!');
+      console.log(data);
+    }
+
+    const onExit = (data) => {
+      console.log('APPLICATION: EXIT!');
+      console.log(data);
+    }
+
+    const widget = WidgetExample.create({
+      title: 'Nice Title!',
+      onEvent,
+      onExit,
+    });
+
+    widget.open();
+  </script>
+</body>
+</html>
